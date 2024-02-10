@@ -1,11 +1,10 @@
-import http, { Server } from 'http';
+import http from 'http';
 import * as dotenv from 'dotenv';
+import { requestHandler } from './tools/requestHandler';
 
 dotenv.config();
 const port = process.env.NODE_PORT;
 
-export const server: Server = http.createServer();
-
-server.listen(port, () => {
+http.createServer(requestHandler).listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
