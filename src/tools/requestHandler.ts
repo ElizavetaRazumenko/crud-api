@@ -8,7 +8,7 @@ import { User } from '../types/types';
 import { sendResponse } from './sendResponse';
 import { MAX_ENDPOINT_DEEP } from '../constants/constants';
 
-const users: User[] = [];
+export const users: User[] = [];
 
 export const requestHandler = (request: IncomingMessage, response: ServerResponse) => {
   try {
