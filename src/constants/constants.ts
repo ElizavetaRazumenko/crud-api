@@ -1,1 +1,0 @@
-export const MAX_ENDPOINT_DEEP = 4;
