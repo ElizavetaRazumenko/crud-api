@@ -15,15 +15,9 @@ dist/
 .idea/
 
 
-tsconfig.json
-tsconfig.*.json
-
-
-.eslintrc
 .eslintignore
 
 
-.prettierrc
 .prettierignore
 
 
