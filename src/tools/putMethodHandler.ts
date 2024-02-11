@@ -38,14 +38,15 @@ export const putMethodHandler = (
                 { message: 'The request does not contain required parameters or the parameters are incorrect' }
               );
             }
-          } else sendResponse(404, response, { message: 'User doesn\'t exist' });
-
+          } else {
+            sendResponse(404, response, { message: 'User doesn\'t exist' });
+          } 
         });
       } else {
         sendResponse(400, response, { message: 'Invalid user ID' });
       }
     } else {
-      sendResponse(400, response, { message: 'Non-existent endpoint' });
+      sendResponse(400, response, { message: 'A specific user ID is required' });
     }
   } catch {
     sendResponse(500, response, { message: 'Internal server error' });

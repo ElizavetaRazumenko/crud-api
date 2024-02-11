@@ -9,6 +9,8 @@ export const sendResponse = <T>(
     response.statusCode = statusCode;
     response.setHeader('Access-Control-Allow-Origin', '*');
     response.setHeader('Content-Type', 'application/json');
-    response.end(JSON.stringify(data));
+    data
+      ? response.end(JSON.stringify(data))
+      : response.end();
   }
 };

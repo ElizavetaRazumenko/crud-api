@@ -3,19 +3,20 @@ import { sendOptionsResponse } from '../tools/sendOptionsResponse';
 import { getMethodHandler } from './getMethodHandler';
 import { postMethodHandler } from './postMethodHandler';
 import { putMethodHandler } from '../tools/putMethodHandler';
+import { deleteMethodHandler } from '../tools/deleteMethodHandler';
 import { User } from '../types/types';
 import { sendResponse } from './sendResponse';
+import { MAX_ENDPOINT_DEEP } from '../constants/constants';
 
 const users: User[] = [];
 
 export const requestHandler = (request: IncomingMessage, response: ServerResponse) => {
   try {
     const { method, url } = request;
-  
     if (
       url 
       && url.startsWith('/api/users') 
-      && url.split('/').length < 5
+      && url.split('/').length <= MAX_ENDPOINT_DEEP
     ) {
       const endpoint = url.slice('api/'.length);
       switch (method) {
@@ -31,6 +32,11 @@ export const requestHandler = (request: IncomingMessage, response: ServerRespons
       case 'PUT':
         putMethodHandler(endpoint, users, request, response);
         break;
+      case 'DELETE':
+        deleteMethodHandler(endpoint, users, response);
+        break;
+      default: 
+        sendResponse(400, response, { message: 'Prohibited method' });
       }
     } else {
       sendResponse(404, response, { message: 'Non-existent endpoint' });
@@ -38,5 +44,4 @@ export const requestHandler = (request: IncomingMessage, response: ServerRespons
   } catch {
     sendResponse(500, response, { message: 'Internal server error' });
   }
-
 };

@@ -9,14 +9,14 @@ export const postMethodHandler = (
   request: IncomingMessage,
   response: ServerResponse
 ): void => {
-  let requestBody = '';
+  try {
+    let requestBody = '';
 
-  request.on('data', (chunk) => {
-    requestBody += chunk;
-  });
+    request.on('data', (chunk) => {
+      requestBody += chunk;
+    });
 
-  request.on('end', () => {
-    try {
+    request.on('end', () => {
       const isUserDataValid = checkValidUserData(requestBody);
       if (isUserDataValid) {
         const { username, age, hobbies } = JSON.parse(requestBody);
@@ -27,7 +27,6 @@ export const postMethodHandler = (
           hobbies
         };
         users.push(createdUser);
-
         sendResponse(201, response, createdUser);
       } else {
         sendResponse(
@@ -36,8 +35,8 @@ export const postMethodHandler = (
           { message: 'The request does not contain required parameters or the parameters are incorrect' }
         );
       }
-    } catch {
-      sendResponse(500, response, { message: 'Internal server error' });
-    }
-  });
+    });
+  } catch {
+    sendResponse(500, response, { message: 'Internal server error' });
+  }
 };
