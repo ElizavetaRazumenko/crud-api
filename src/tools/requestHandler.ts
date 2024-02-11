@@ -1,5 +1,8 @@
 import { IncomingMessage, ServerResponse } from 'http';
+import { sendOptionsResponse } from '../tools/sendOptionsResponse';
 import { getMethodHandler } from './getMethodHandler';
+import { postMethodHandler } from './postMethodHandler';
+import { putMethodHandler } from '../tools/putMethodHandler';
 import { User } from '../types/types';
 import { sendResponse } from './sendResponse';
 
@@ -16,15 +19,24 @@ export const requestHandler = (request: IncomingMessage, response: ServerRespons
     ) {
       const endpoint = url.slice('api/'.length);
       switch (method) {
+      case 'OPTIONS': 
+        sendOptionsResponse(response);
+        break;
       case 'GET': 
         getMethodHandler(endpoint, users, response);
+        break;
+      case 'POST': 
+        postMethodHandler(users, request, response);
+        break;
+      case 'PUT':
+        putMethodHandler(endpoint, users, request, response);
         break;
       }
     } else {
       sendResponse(404, response, { message: 'Non-existent endpoint' });
     }
   } catch {
-    console.log('PIZDEC');
+    sendResponse(500, response, { message: 'Internal server error' });
   }
 
 };

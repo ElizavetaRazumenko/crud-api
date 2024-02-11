@@ -13,7 +13,7 @@ export const getMethodHandler = (endpoint: string, users: User[], response: Serv
         ? sendResponse(200, response, currentUser)
         : sendResponse(404, response, { message: 'User doesn\'t exist' });
     } else {
-      sendResponse(400, response, { message: 'User not found' });
+      sendResponse(400, response, { message: 'Invalid user ID' });
     }
   } else {
     sendResponse(200, response, users);
