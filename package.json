@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint src",
-    "start:dev": "cross-env NODE_ENV=development nodemon --exec ts-node src/server.ts",
-    "start:prod": "cross-env NODE_ENV=production node dist/server.js",
     "build": "webpack",
+    "start:dev": "cross-env NODE_ENV=development npx nodemon",
+    "start:prod": "cross-env NODE_ENV=production npm run build && npm run start",
     "start:dev:multi": "cross-env USE_CLUSTER=true  npx nodemon --experimental-worker",
     "start:prod:multi": "cross-env NODE_ENV=production npm run build && cross-env USE_CLUSTER=true npm run start",
     "start": "node ./dist/bundle.js",
