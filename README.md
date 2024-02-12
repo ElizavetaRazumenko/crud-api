@@ -1,37 +1,43 @@
 # CRUD API
-To work with the project you should to clone the repository:
+1. Clone this repository:
 
 `git clone https://github.com/ElizavetaRazumenko/crud-api.git`
 
-switch to the develop branch:
+2. Switch to the development branch:
 
 `git checkout dev`
 
-install the dependencies:
+3. Install the dependencies:
 
 `npm i`
 
-To start a project in development mode:
-
+4. to start the project, use one of the commands:
+   
 `npm run start:dev`
 
-or in production mode:
+to start a project in development mode
 
 `npm run start:prod`
 
-After launching the application, launch the Insomnia or another API client.
+to start a project in production mode
+## Main methods
+Method to get an array of all users:
 
-To get an array of all users, select the GET method and specify the address:
+`GET http://localhost:{PORT value}/api/users`
 
-`GET http://localhost:{PORT value from .env}/api/users`
+Method to get a specific user (the id must be in uuid format):
 
-To get a specific user, use the GET method. In the address bar, add the ID of an existing user (The ID must be in uuid format).
+`GET http://localhost:{PORT value}/api/users/{id in uuid format}`
 
-`GET http://localhost:{PORT value from .env}/api/users/{id in uuid format}`
+Method to add a new user (data must be in a special format):
 
-To add a new user, use the POST method and specify the address. And don't forget to specify the object in the desired format:
+    - `id` — unique identifier (`string`, `uuid`) generated on server side
+    - `username` — user's name (`string`, **required**)
+    - `age` — user's age (`number`, **required**)
+    - `hobbies` — user's hobbies (`array` of `strings` or empty `array`, **required**)
+    
 
-`POST http://localhost:{PORT value from .env}/api/users`
+`POST http://localhost:{PORT value}/api/users`
 
 ```
 {
@@ -43,9 +49,9 @@ To add a new user, use the POST method and specify the address. And don't forget
 }
 ```
 
-To change the user's data, use the PUT method. In the address bar, specify the user ID in the uuid format (The ID must match the ID of your created user). And don't forget to specify the object in the desired format.
+Method to change the user's data:
 
-`PUT http://localhost:{PORT value from .env}/api/users/{id in uuid format}`
+`PUT http://localhost:{PORT value}/api/users/{id in uuid format}`
 ```
 {
 	"username": "Nick",
@@ -55,14 +61,14 @@ To change the user's data, use the PUT method. In the address bar, specify the u
 	]
 }
 ```
-To delete a character, use the DELETE method. In the address bar, specify the user ID in the uuid format (The ID must match the ID of an existing user).
+Method to delete a character (the id must match the id of an existing user).
 
-`DELETE http://localhost:{PORT value from .env}/api/users/b97fbf9e-2a38-43a4-9692-74aa143871a0`
+`DELETE http://localhost:{PORT value}/api/users/{id in uuid format}`
 
-To run the tests, start the server,
+## Testing
+
+To run the tests, write the following commands:
 
 `npm run start:dev`
-
-and in another terminal write the command
 
 `npm run test`
