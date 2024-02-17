@@ -4,9 +4,9 @@ import { getMethodHandler } from './getMethodHandler';
 import { postMethodHandler } from './postMethodHandler';
 import { putMethodHandler } from '../tools/putMethodHandler';
 import { deleteMethodHandler } from '../tools/deleteMethodHandler';
-import { User } from '../types/types';
 import { sendResponse } from './sendResponse';
 import { MAX_ENDPOINT_DEEP } from '../constants/constants';
+import { User } from '../types/types';
 
 export const users: User[] = [];
 
