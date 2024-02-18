@@ -9,6 +9,7 @@ export const getCreateServer = () => http.createServer((req, res) => {
 });
 
 dotenv.config();
+
 const PORT = Number(process.env.NODE_PORT) || 4000;
 const numCPUs = os.cpus().length;
 
